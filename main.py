@@ -33,7 +33,7 @@ class CarBehavior:
                 white = True
 
     #Kan være der skal tilføjes så vi kigger på eksempelvis de sidste 5-10 værdier fra line counter sensor
-    #før vi registrerer det som en linje (Hvis værdien nu ved en fejl jumper ned til sort)..
+    #før vi registrerer det som en linje (Hvis værdien nu ved en fejl jumper ned til sort)
     def straigt(self, lines):
         while lines > 0:
             self.lineFollow(70)
