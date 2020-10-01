@@ -20,6 +20,9 @@ class CarControl:
     def drive(self, l_speed, r_speed):
         self.tank_pair.on(left_speed=l_speed, right_speed=r_speed)
 
+    def reverse(self):
+        self.tank_pair.on_for_degrees(left_speed = -90, right_speed = -90, degrees = 360, brake = True)
+
     def brake(self):
         self.tank_pair.off(brake = True)
 

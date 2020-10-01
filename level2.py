@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 
-import basic_control
+import level1
+from time import sleep
 
 
 class CarBehavior:
     def __init__(self, ti):
         self.target_intesity = ti    
         self.factor = 1
-        self.cc = basic_control.CarControl()
+        self.cc = level1.CarControl()
         
          
 
@@ -45,19 +46,11 @@ class CarBehavior:
 
 
 
-
                     
         
         
         
 
-test = CarBehavior(18)
-test.cc.play_sound()
-test.straigt(2)
-test.cc.turn_right()
-test.straigt(1)
-test.cc.turn_right()
-test.straigt(1)
 
 
 
