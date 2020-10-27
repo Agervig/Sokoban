@@ -23,25 +23,32 @@ class CarIntructions:
 
     def preform_instructions(self):
         for i in range(len(self.instruction)):
-            if test.instruction[i] == "S":
+            if self.instruction[i] == "S":
+                print("STRAIGHT")
                 s_counter = 1
-                while instruction[i + s_counter] == "S"
+                while self.instruction[i+s_counter] == "S":
                     s_counter += 1
                 self.cb.straigt(s_counter)
                 i += s_counter
-            if test.instruction[i] == "L":
-                self.cb.cc.turn_left()
+            elif self.instruction[i] == "L":
+                print("LEFT")
+                self.cb.cc.turn_left_new()
+                print("AAAAAAAAAAAAAAAAAAAARG")
                 self.cb.straigt(1)
-            if test.instruction[i] == "R":
-                self.cb.cc.turn_right()
+            elif self.instruction[i] == "R":
+                print("RIGHT")
+                self.cb.cc.turn_right_new()
                 self.cb.straigt(1)
-            if test.instruction[i] == "B": 
+            elif self.instruction[i] == "B":
+                print("BACK") 
                 self.cb.cc.turn_arround()
                 self.cb.straigt(1)
 
 
-
+test = CarIntructions()
 test.preform_instructions()
 
 
-print("SLUT")
+
+
+

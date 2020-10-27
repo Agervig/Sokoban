@@ -15,6 +15,9 @@ class CarControl:
         self.line_sensor = ColorSensor(INPUT_2)
         self.line_counter = ColorSensor(INPUT_3)
         self.sound = Sound()
+        self.gyro = GyroSensor(INPUT_1)
+        self.gyro.reset()
+        self.dir_state = "S"
 
 
     def drive(self, l_speed, r_speed):
@@ -44,6 +47,68 @@ class CarControl:
     def play_sound(self):
         self.sound.beep()
 
+    def read_gyro(self):
+        return self.gyro.angle
+
+    def turn_left_new(self):
+        self.tank_pair.on(left_speed = -90, right_speed = 90)
+        if self.dir_state == "S":
+            while True:
+                if self.read_gyro() <= -90:             #Ikke sikker på at den altid kan læse ved præcist -90
+                    self.tank_pair.off(brake = True)
+                    self.dir_state ="L"
+                    return 0
+        elif self.dir_state == "L":
+            while True:
+                if self.read_gyro() == 180 or self.read_gyro() == -180:
+                    self.steer_pair.stop()
+                    self.dir_state = "B"
+                    return 0
+        elif self.dir_state == "B":
+            while True:
+                if self.read_gyro() == 90 or self.read_gyro() == -270:
+                    self.steer_pair.stop()
+                    self.dir_state = "R"
+                    return 0
+        elif self.dir_state == "R":
+            while True:
+                if self.read_gyro() == 0 or self.read_gyro == -360 or self.read_gyro == 360:
+                    self.gyro.reset()
+                    self.steer_pair.stop()
+                    self.dir_state = "S"
+                    return 0
 
 
+    def turn_right_new(self):
+        self.steer_pair.on(90,90)
+        print("JEG ER HER")
+        if self.dir_state == "S":
+            while True:
+                if self.read_gyro == 90:
+                    self.steer_pair.stop()
+                    self.dir_state = "R"
+                    return 0
+        elif self.dir_state == "L":
+            while True:
+                if self.read_gyro() == 360 or self.read_gyro() == 0:
+                    self.gyro.reset()
+                    self.steer_pair.stop()
+                    self.dir_state = "S"
+                    return 0
+        elif self.dir_state == "B": 
+            while True:
+                if self.read_gyro() == 270 or self.read_gyro == -90:
+                    self.steer_pair.stop()
+                    self.dir_state == "R"
+                    return 0
+        elif self.dir_state == "R":
+            while True:
+                if self.read_gyro() == 180 or self.read_gyro() == -180:
+                    self.steer_pair.stop()
+                    self.dir_state == "B"
+                    return 0
 
+            
+
+
+    
